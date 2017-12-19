@@ -1,5 +1,6 @@
 from fman import DirectoryPaneCommand, OK, CANCEL, show_file_open_dialog, \
 	PLATFORM, load_json, show_alert, save_json
+from fman.url import as_human_readable
 from os.path import exists
 from subprocess import Popen
 
@@ -10,7 +11,7 @@ class Preview(DirectoryPaneCommand):
 		'Linux': 'Applications (*)'
 	}
 	def __call__(self):
-		file_path = self.pane.get_file_under_cursor()
+		file_path = as_human_readable(self.pane.get_file_under_cursor())
 		if not exists(file_path):
 			show_alert('No file is selected!')
 			return
